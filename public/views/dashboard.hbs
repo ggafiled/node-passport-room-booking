@@ -1,0 +1,104 @@
+{{> header}}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/custom.css">
+    {{!-- Calendar --}}
+    <link href='../vendor/fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='../vendor/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='../vendor/fullcalendar/packages/interaction/main.css' rel='stylesheet' />
+    <link href='../vendor/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+    <link href='../vendor/fullcalendar/packages/list/main.css' rel='stylesheet' />
+
+    <script src='../vendor/fullcalendar/packages/core/main.js'></script>
+    <script src='../vendor/fullcalendar/packages/daygrid/main.js'></script>
+    <script src='../vendor/fullcalendar/packages/interaction/main.js'></script>
+    <script src='../vendor/fullcalendar/packages/timegrid/main.js'></script>
+    <script src='../vendor/fullcalendar/packages/list/main.js'></script>
+    <style>
+        .no-js #loader {
+            display: none;
+        }
+
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
+
+        .se-pre-con {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background: url(http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
+        }
+
+    </style>
+
+</head>
+<div id="se-pre-con"></div>
+<div class="wrapper">
+    {{> sidenav}}
+    <div id="content">
+        {{> navbar}}
+        <div class="container">
+            <div id='calendar'></div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    document.addEventListener('load',function() {
+		// Animate loader off screen
+        var loading = document.getElementById('se-pre-con');
+        loading.fadeOut('slow');
+	});
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var loading = document.getElementById('se-pre-con');
+        loading.style.display = 'none';
+
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            isLoading: true,
+            plugins: ['dayGrid', 'timeGrid', 'list', 'interaction'],
+            height: 'parent',
+            eventLimit: true, // for all non-TimeGrid views
+            views: {
+                timeGrid: {
+                    eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+                }
+            },
+            events: [
+                {
+                    title: 'event1',
+                    start: '2020-01-01',
+                    color: '#f48fb1',
+                    textColor:'#e0e0e0'
+                },
+                {
+                    title: 'Nattapol Booking Room',
+                    start: '2020-01-05',
+                    end: '2020-01-07'
+                },
+                {
+                    title: 'event3',
+                    start: '2020-01-09T12:30:00',
+                    allDay: false // will make the time show
+                }
+            ]
+        });
+
+        calendar.render();
+        calendar.on('dateClick', function (info) {
+            alert('a day has been clicked!' + info.dateStr);
+            console.log('clicked on ' + info.dateStr);
+        });
+    });
+</script>

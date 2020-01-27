@@ -1,0 +1,146 @@
+{{> header}}
+<style>
+    body {
+        font-family: Montserrat;
+    }
+
+    .fa2 {
+        color: #16171C;
+        font-size: 14px;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .btn-list-menu:hover,
+    .btn-list-menu .fa2:hover {
+        color: goldenrod;
+    }
+
+    .btn-search,
+    .btn-search:hover,
+    .btn-search:focus {
+        vertical-align: middle;
+        justify-content: space-around;
+        min-width: 20vw;
+        color: grey;
+        padding: 5px;
+        font-size: 12px;
+        border: 1px solid grey;
+        border-radius: 5px;
+        background: white;
+    }
+
+    .dropdown-menu-right {
+        font-size: 14px !important;
+    }
+
+    .modal-dialog {
+        padding-top: 15px;
+        min-width: 70vw;
+    }
+
+    .modal-dialog,
+    .modal-content,
+    .modal {
+        background-color: transparent;
+        border: none;
+    }
+
+    .input-search {
+        padding: 20px;
+        padding-left: 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .modal-backdrop {
+        background-color: #1c313a;
+    }
+
+    .row {
+        padding-right: 10px;
+    }
+
+    .dropdown-item {
+        color: #455a64;
+    }
+
+    .dropdown-item:hover {
+        background-color: #1264A3;
+        color: white;
+    }
+
+    .dropdown-menu {
+        min-width: 280px;
+    }
+</style>
+<script>
+    $('#searchModal').on('shown.bs.modal', function () {
+        $('#input-search').focus();
+    })
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger: 'hover'
+        })
+    })
+</script>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../vendor/alertifyjs/alertify.min.js"></script>
+    <link rel="stylesheet" href="../../vendor/alertifyjs/css/alertify.min.css" />
+    <link rel="stylesheet" href="../../vendor/alertifyjs/css/themes/default.min.css" />
+</head>
+<nav class="navbar navbar-expand-md navbar-light shadow-sm p-3 mb-5 bg-white rounded">
+    <a href="#" class="navbar-brand justify-content-center">
+        <span>All Task : Welcome #{{ user.u_name }}</span>
+    </a>
+
+    <div class="row ml-auto">
+        <button type="button" class="btn btn-outline-secondary btn-search" data-toggle="modal"
+            data-target="#searchModal">Search</button>
+        <button class="btn btn-white btn-sm btn-list-menu" data-toggle="tooltip" data-placement="bottom"
+            title="In relationship">
+            <i class="fa fa2 fa-at" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-white btn-sm btn-list-menu" data-toggle="tooltip" data-placement="bottom"
+            title="Start booking">
+            <i class="fa fa2 fa-star" aria-hidden="true"></i>
+        </button>
+
+        <div class="dropdown">
+            <a data-toggle="dropdown" data-toggle="tooltip" data-placement="left" title="More item">
+                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="bottom" title="More item">
+                    <i class="fa fa2 fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#"><i class="fa fa-cogs"
+                        aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><i class="fa fa-question-circle"
+                        aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Helps</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout"><i class="fa fa-american-sign-language-interpreting"
+                        aria-hidden="true"></i></i>&nbsp;&nbsp;&nbsp;&nbsp;Log out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- The Modal -->
+<div class="modal" id="searchModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input autofocus tabindex="1" type="text" class="form-control input-search" id="input-search"
+                        placeholder="Search your intent...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
